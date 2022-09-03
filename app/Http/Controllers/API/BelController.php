@@ -136,6 +136,31 @@ class BelController extends Controller
             ],'Something wrong.');
         }
     }
+    //ADD POST
+    public function addSchedule(Request $request)
+    {
+        try {
+            $request->validate([
+                'day_id' => 'required|integer',
+                'activity_id' => 'required|integer',
+                'time'=>'required|string'
+            ]);
+
+            $schedule = Schedule::create([
+                'day_id' => $request->day_id,
+                'activity_id'=>$request->activity_id,
+                'time'=>$request->time
+            ]);
+
+            return ResponseFormatter::success([
+                $schedule
+            ],'Add schedule successfully!');
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'error'=>$error->getMessage()
+            ],'Something wrong.');
+        }
+    }
     // CREATE
     // DELETE
     // UPDATE
