@@ -6,6 +6,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Models\Activity;
 use App\Models\Day;
+use App\Models\Schedule;
 use Exception;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
@@ -62,7 +63,7 @@ class BelController extends Controller
         try {
             $activities = Activity::all();
             return ResponseFormatter::success([
-                'data'=>$activities
+                $activities
             ],'Fetch activities successfully!');
         } catch (Exception $error) {
             return response()->json($error,500);
@@ -105,4 +106,38 @@ class BelController extends Controller
         }
     }
     // ACTIVITY
+
+    // SCHEDULE
+    // GET
+    public function getSchedules()
+    {
+        try {
+            $schedules = Schedule::all();
+            return ResponseFormatter::success([
+                'data'=>$schedules
+            ],'Fetch schedule successfully.');
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'error'=>$error->getMessage()
+            ],'Something wrong.');
+        }
+    }
+    // GET DETAIL
+    public function getSchedule($id)
+    {
+        try {
+            $schedule = Schedule::find($id);
+            return ResponseFormatter::success([
+                'data'=>$schedule
+            ],'Fetch schedule detail successfully.');
+        } catch (Exception $error) {
+            return ResponseFormatter::error([
+                'error'=>$error->getMessage()
+            ],'Something wrong.');
+        }
+    }
+    // CREATE
+    // DELETE
+    // UPDATE
+    // SCHEDULE
 }
