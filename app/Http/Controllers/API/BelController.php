@@ -114,7 +114,7 @@ class BelController extends Controller
         try {
             $schedules = Schedule::all();
             return ResponseFormatter::success([
-                'data'=>$schedules
+                $schedules
             ],'Fetch schedule successfully.');
         } catch (Exception $error) {
             return ResponseFormatter::error([
