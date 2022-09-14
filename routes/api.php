@@ -29,6 +29,7 @@ Route::prefix('days')->group(function(){
 // activity
 Route::prefix('activity')->group(function(){
     Route::get('/', [BelController::class, 'getActivities']);
+    Route::post('/create', [BelController::class, 'createActivity']);
 });
 //schedule
 Route::prefix('schedule')->group(function(){
